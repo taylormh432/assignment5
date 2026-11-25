@@ -6,13 +6,13 @@ spec:
   # newResource defines the new CRD to be installed define a workflow.
   newResource:
     resource:
-      kind: "" # Requirement 3.1
+      kind: "Greeting" # Requirement 3.1
       group: platformapi.kubeplus
       version: v1alpha1
-      plural: "" # Requirement 3.2
+      plural: "greetings" # Requirement 3.2
     # URL/File path of the Helm chart that contains Kubernetes resources that represent a workflow.
-    chartURL: ""   # Requirement 3.3 Structure file:///<chart-name>-<version>.tgz
-    chartName: ""   # Requirement 3.4 Structure <chart-name>
+    chartURL: "file:///greetings-chart-0.1.1.tgz"   # Requirement 3.3 Structure file:///<chart-name>-<version>.tgz
+    chartName: "greetings-chart"   # Requirement 3.4 Structure <chart-name>
   # respolicy defines the resource policy to be applied to instances of the specified custom resource.
   respolicy:
     apiVersion: workflows.kubeplus/v1alpha1
@@ -21,7 +21,7 @@ spec:
       name: greeting-service-policy
     spec:
       resource:
-        kind: "" # Requirement 3.1
+        kind: "Greeting" # Requirement 3.1
         group: platformapi.kubeplus
         version: v1alpha1
   # resmonitor identifies the resource instances that should be monitored for CPU/Memory/Storage.
@@ -35,7 +35,7 @@ spec:
       name: greeting-service-monitor
     spec:
       resource:
-        kind: "" # Requirement 3.1
+        kind: "Greeting" # Requirement 3.1
         group: platformapi.kubeplus
         version: v1alpha1
       # This attribute indicates that Pods that are reachable through all the relationships should be used
