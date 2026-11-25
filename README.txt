@@ -62,9 +62,10 @@ until kubectl get pods -A | grep kubeplus | grep Running; do echo "Waiting for K
 
    # Requirement 1.1
    # Note that we do not need to connect Docker CLI on our host to the Docker daemon inside minikube (Why?)
-   docker build -t gcr.io/<gcp-project-id>/<uteid>-assignment4:latest .
-   docker push gcr.io/<gcp-project-id>/<uteid>-assignment4:latest
-
+   docker build --platform=linux/x86_64 \
+  -t gcr.io/<gcp-project-id>/tmh3799-assignment5:latest .
+   docker push gcr.io/<gcp-project-id>/tmh3799-assignment5:latest
+   
    - FOR Mac with ARM processor:
       The image default using above command will be for ARM architecture.
       The GKE cluster, by default create x86_64 worker nodes. There is mismatch in the processor architecture of the image.
