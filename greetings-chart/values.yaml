@@ -1,4 +1,4 @@
 REPLICAS: 1
 GREETING: "Spring was before."
 NODE_PORT: 32766
-IMAGE: "gcr.io/cloudark-kubeplus/dk22736-assignment4:latest"
+IMAGE: "gcr.io/tmh3799-assignment5/tmh3799-assignment5:latest"

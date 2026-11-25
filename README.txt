@@ -1,3 +1,9 @@
+
+name: Taylor Hickman  
+eid: tmh3799  
+appURL1: http://136.115.36.118:32760  
+appURL2: http://136.115.36.118:32761  
+comments: None
 Setup
 -----
 
@@ -54,7 +60,10 @@ Setup
    - apiserver=`kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}'`
    - python3 provider-kubeconfig.py -s $apiserver -x cluster1 create $KUBEPLUS_NS
    - deactivate
-   - helm install kubeplus "https://github.com/cloud-ark/operatorcharts/blob/master/kubeplus-chart-4.2.0.tgz?raw=true" --kubeconfig=kubeplus-saas-provider.json -n $KUBEPLUS_NS
+   - helm install kubeplus \
+  "https://github.com/cloud-ark/operatorcharts/blob/master/kubeplus-chart-4.2.1.tgz?raw=true" \
+  --kubeconfig=kubeplus-saas-provider.json \
+  -n $KUBEPLUS_NS
 until kubectl get pods -A | grep kubeplus | grep Running; do echo "Waiting for KubePlus to start.."; sleep 1; done
 
 
@@ -62,9 +71,11 @@ until kubectl get pods -A | grep kubeplus | grep Running; do echo "Waiting for K
 
    # Requirement 1.1
    # Note that we do not need to connect Docker CLI on our host to the Docker daemon inside minikube (Why?)
-   docker build --platform=linux/x86_64 \
-  -t gcr.io/<gcp-project-id>/tmh3799-assignment5:latest .
-   docker push gcr.io/<gcp-project-id>/tmh3799-assignment5:latest
+   docker build --platform=linux/amd64 \
+  -t gcr.io/tmh3799-assignment5/tmh3799-assignment5:latest .
+
+   docker push gcr.io/tmh3799-assignment5/tmh3799-assignment5:latest
+
    
    - FOR Mac with ARM processor:
       The image default using above command will be for ARM architecture.
