@@ -1,0 +1,7 @@
+AI tool used: ChatGPT 
+
+Debugging prompts/questions:
+- Helped troubleshoot terminal commands for setting up and connecting to the GKE cluster with gcloud and kubectl
+- Helped debug installation and setup issues for Helm and KubePlus
+- Helped diagnose KubePlus plugin errors and fix the chart upload workflow
+- Helped debug Docker image build/push issues and the GKE ImagePullBackOff error
