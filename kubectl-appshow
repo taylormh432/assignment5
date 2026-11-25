@@ -5,8 +5,6 @@ if (( $# < 2 )); then
   exit 0
 fi
 
-echo "TODO (see assignment requirements)"
-
 # Requirement 4.1
 # Take following inputs in order
 # kind
@@ -20,3 +18,40 @@ echo "TODO (see assignment requirements)"
 # Pods, Deployment, Configmap, ServiceAccount, NetworkPolicy
 
 
+kind=$1
+instance=$2
+
+# Check whether the requested instance exists
+if ! kubectl get "$kind" "$instance" >/dev/null 2>&1; then
+  echo "Instance $instance does not exist for Kind $kind."
+  exit 1
+fi
+
+# KubePlus creates the application instance in a namespace
+# with the same name as the instance.
+namespace=$instance
+
+pod=$(kubectl get pods -n "$namespace" \
+  -o jsonpath='{.items[0].metadata.name}')
+
+deployment=$(kubectl get deployments -n "$namespace" \
+  -o jsonpath='{.items[0].metadata.name}')
+
+configmap=$(kubectl get configmap greetings-config -n "$namespace" \
+  -o jsonpath='{.metadata.name}')
+
+serviceaccount=$(kubectl get serviceaccount greetings -n "$namespace" \
+  -o jsonpath='{.metadata.name}')
+
+networkpolicy=$(kubectl get networkpolicy allow-external-traffic -n "$namespace" \
+  -o jsonpath='{.metadata.name}')
+  
+cat <<EOF
+{
+  "pod": "$pod",
+  "deployment": "$deployment",
+  "configmap": "$configmap",
+  "serviceaccount": "$serviceaccount",
+  "networkpolicy": "$networkpolicy"
+}
+EOF
