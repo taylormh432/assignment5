@@ -1,0 +1,10 @@
+apiVersion: platformapi.kubeplus/v1alpha1
+kind: Greeting
+metadata:
+  name: greetings2
+spec:
+  REPLICAS: 1
+  GREETING: "This is greeting2"
+  NODE_PORT: 32761
+  IMAGE: "gcr.io/tmh3799-assignment5/tmh3799-assignment5:latest"
+  
